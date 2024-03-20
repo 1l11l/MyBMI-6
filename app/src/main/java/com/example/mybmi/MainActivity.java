@@ -2,6 +2,7 @@ package com.example.mybmi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -25,9 +26,15 @@ public class MainActivity extends AppCompatActivity {
        double w = Double.parseDouble(weight.getText().toString());
        double bmi = w / (h/100.0  * h /100.0);
        bmi = Double.parseDouble(df.format(bmi));
+
        String result = getString(R.string.strShowBMI) + bmi;
        TextView show =  findViewById(R.id.tvShow);
        show.setText(result);
 
+    }
+
+    public void GoNext(View view) {
+        Intent intent = new Intent(this, ResultActivity.class);
+        startActivity(intent);
     }
 }
