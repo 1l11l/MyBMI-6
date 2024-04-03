@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -15,12 +17,27 @@ public class MainActivity extends AppCompatActivity {
     private EditText height;
     private EditText weight;
     private TextView show;
+    private RadioGroup rbSex;
+    private RadioButton rbMale;
+    private RadioButton rbFemale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
        super.onCreate(savedInstanceState);
        setContentView(R.layout.activity_main);
        fideViews();
+
+       rbSex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+           @Override
+           public void onCheckedChanged(RadioGroup group, int checkedId) {
+               if (checkedId == R.id.rbMale){
+                   show.setText("我4男生");
+               }
+               else if(checkedId == R.id.rbFemale){
+                   show.setText("我4女生");
+               }
+           }
+       });
     }
 
     public void calcBMI(View view) {
@@ -47,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
        height = findViewById(R.id.etHeight);
        weight = findViewById(R.id.edWeight);
        show = findViewById(R.id.tvShow);
+       rbSex = findViewById(R.id.rbSex);
+       rbMale = findViewById(R.id.rbMale);
+       rbFemale = findViewById(R.id.rbFemale);
     }
 
     public void GoNext(View view) {

@@ -3,6 +3,7 @@ package com.example.mybmi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,15 +19,19 @@ public class ResultActivity extends AppCompatActivity {
         show.setText(String.valueOf(bmi));
         if (bmi < 18.5){
             show.setText("體重過輕");
-            img.setImageResource(R.drawable.擷取1);
+            img.setImageResource(R.drawable.a1);
         }
         else if (bmi <= 24){
             show.setText("體重正常");
-            img.setImageResource(R.drawable.擷取2);
+            img.setImageResource(R.drawable.a2);
         }
         else{
             show.setText("體重過重");
-            img.setImageResource(R.drawable.擷取3);
+            img.setImageResource(R.drawable.a3);
         }
+    }
+
+    public void GoBack(View view) {
+        finish();
     }
 }
