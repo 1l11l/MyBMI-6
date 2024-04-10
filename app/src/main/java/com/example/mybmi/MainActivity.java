@@ -28,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox cbGrape;
     private CheckBox cbApple;
     private CheckBox cbPomelo;
+    private String[] sex = {"男生", "女生"};
+    private int sexSelected = 0;
+    private String[] fruits = {"葡萄", "蘋果", "柚子"};
+    private boolean[] fruitsSelected = {false, false, false};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,17 +99,38 @@ public class MainActivity extends AppCompatActivity {
         builder.setTitle("BMI");
         double bmi = getBmi();
         String result = getString(R.string.strShowBMI) + bmi;
-        builder.setMessage(result);
+        //顯示訊息
+//      builder.setMessage(result);
+        //顯示單選
+        builder.setSingleChoiceItems(sex, sexSelected, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                sexSelected = which;
+            }
+        });
+        //顯示多選
+        builder.setMultiChoiceItems(fruits, fruitsSelected, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                fruitsSelected[which] = isChecked;
+            }
+        });
         builder.setPositiveButton("確定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(MainActivity.this, "你好", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, sex[sexSelected], Toast.LENGTH_SHORT).show();
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(MainActivity.this, "取消", Toast.LENGTH_SHORT).show();
+                String msg = "";
+                for (int i = 0; i < fruitsSelected.length; i++){
+                    if (fruitsSelected[i]){
+                        msg += fruits[i];
+                    }
+                }
+                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
             }
         });
         builder.show();
@@ -117,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
        String result = getString(R.string.strShowBMI) + bmi;
 
-       //show.setText(result);
+//       show.setText(result);
 
        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
 
