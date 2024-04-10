@@ -1,7 +1,9 @@
 package com.example.mybmi;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 
@@ -32,37 +35,45 @@ public class MainActivity extends AppCompatActivity {
        setContentView(R.layout.activity_main);
        fideViews();
 
-       rbSex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-           @Override
-           public void onCheckedChanged(RadioGroup group, int checkedId) {
-               if (checkedId == R.id.rbMale){
-                   show.setText("我4男生");
-               }
-               else if(checkedId == R.id.rbFemale){
-                   show.setText("我4女生");
-               }
-           }
-       });
+        myLisiner();
 
-       cbGrape.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-           @Override
-           public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-               getFruits();
-           }
-       });
-       cbApple.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-           @Override
-           public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                getFruits();
-           }
-       });
-       cbPomelo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-           @Override
-           public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                getFruits();
-           }
-       });
+    }
 
+    private void myLisiner() {
+        myListener();
+    }
+
+    private void myListener() {
+        rbSex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.rbMale){
+                    show.setText("我4男生");
+                }
+                else if(checkedId == R.id.rbFemale){
+                    show.setText("我4女生");
+                }
+            }
+        });
+
+        cbGrape.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                getFruits();
+            }
+        });
+        cbApple.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                 getFruits();
+            }
+        });
+        cbPomelo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                 getFruits();
+            }
+        });
     }
 
     private void getFruits() {
@@ -79,13 +90,36 @@ public class MainActivity extends AppCompatActivity {
         show.setText("我喜歡吃" + msg);
     }
 
+    public void showDialog(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("BMI");
+        double bmi = getBmi();
+        String result = getString(R.string.strShowBMI) + bmi;
+        builder.setMessage(result);
+        builder.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(MainActivity.this, "你好", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(MainActivity.this, "取消12", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.show();
+    }
+
     public void calcBMI(View view) {
 
        double bmi = getBmi();
 
        String result = getString(R.string.strShowBMI) + bmi;
 
-       show.setText(result);
+       //show.setText(result);
+
+       Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
 
     }
 
