@@ -102,10 +102,10 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "你好", Toast.LENGTH_SHORT).show();
             }
         });
-        builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(MainActivity.this, "取消12", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "取消", Toast.LENGTH_SHORT).show();
             }
         });
         builder.show();
