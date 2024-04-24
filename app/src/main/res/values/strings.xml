@@ -4,6 +4,6 @@
     <string name="strInputHeight">Please Input Height</string>
     <string name="strInputWeight">Please Input Weight</string>
     <string name="strShowBMI">Your BMI is</string>
-    <string name="strGoNext" >GoNext</string>
+    <string name="strGoNext">GoNext</string>
     <string name="GoBack">返回</string>
 </resources>
